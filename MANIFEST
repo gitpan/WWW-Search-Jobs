@@ -1,0 +1,13 @@
+ChangeLog
+MANIFEST
+Makefile.PL
+lib/WWW/Search/AOL/Classifieds/Employment.pm
+lib/WWW/Search/AltaVista/Careers.pm
+lib/WWW/Search/Brassring.pm
+lib/WWW/Search/CraigsList.pm
+lib/WWW/Search/Dice.pm
+lib/WWW/Search/HeadHunter.pm
+lib/WWW/Search/HotJobs.pm
+lib/WWW/Search/Monster.pm
+lib/WWW/Search/Yahoo/Classifieds/Employment.pm
+t/use.t
