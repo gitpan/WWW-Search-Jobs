@@ -1,20 +1,19 @@
-#
+
 # Monster.pm
 # Author: Alexander Tkatchev
 # e-mail: Alexander.Tkatchev@cern.ch
 #
 # WWW::Search back-end for Monster
 # http://jobsearch.monster.com/jobsearch.asp
-#
 
 # Maint:
 # 4/20/01
 # Wayne Rogers
-#
 # fixed a problem that skewed results on column to the right.
 # Monster now uses only a location ID (lid) vice city, state.
 
-package WWW::Search::Monster;
+# 2006-02-25 Brian Sammon
+# Parsing code update and pod updates.
 
 =head1 NAME
 
@@ -22,16 +21,16 @@ WWW::Search::Monster - class for searching Monster
 
 =head1 SYNOPSIS
 
- use WWW::Search;
- my $oSearch = new WWW::Search('Monster');
- my $sQuery = WWW::Search::escape_query("unix and (c++ or java)");
- $oSearch->native_query($sQuery,
- 			{'st' => 'CA',
-			 'tm' => '14d'});
- while (my $res = $oSearch->next_result()) {
-     print $res->company . "\t" . $res->title . "\t" . $res->change_date
-	 . "\t" . $res->location . "\t" . $res->url . "\n";
- }
+  use WWW::Search;
+  my $oSearch = new WWW::Search('Monster');
+  my $sQuery = WWW::Search::escape_query("perl and (perl or perl)");
+  $oSearch->native_query($sQuery,
+  	                 {'st' => 'CA',
+                          'tm' => '14d'});
+  while (my $res = $oSearch->next_result()) {
+      print $res->company . "\t" . $res->title . "\t" . $res->change_date
+         . "\t" . $res->location . "\t" . $res->url . "\n";
+  }
 
 =head1 DESCRIPTION
 
@@ -44,7 +43,7 @@ description of the query language.
 The returned WWW::SearchResult objects contain B<url>, B<title>, B<company>,
 B<location> and B<change_date> fields.
 
-=head1 OPTIONS 
+=head1 OPTIONS
 
 The following search options can be activated by sending
 a hash as the second argument to native_query().
@@ -76,91 +75,159 @@ Possible categories are:
 
 =over 2
 
-=item * 1   Accounting/Auditing
+=item * 1    Accounting/Auditing
 
-=item * 2   Administrative and Support Services
+=item * 2    Administrative and Support Services
 
-=item * 8   Advertising/Marketing/Public Relations
+=item * 8    Advertising/Marketing/Public Relations
 
-=item * 540 Agriculture, Forestry, & Fishing
+=item * 5620 Aerospace/Aviation/Defense
 
-=item * 541 Architectural Services
+=item * 540  Agriculture, Forestry, & Fishing
 
-=item * 12  Arts, Entertainment, and Media
+=item * 9004 Airlines
 
-=item * 576 Banking
+=item * 541  Architectural Services
 
-=item * 46  Biotechnology and Pharmaceutical
+=item * 12   Arts, Entertainment, and Media
 
-=item * 542 Community, Social Services, and Nonprofit
+=item * 576  Banking
 
-=item * 543 Computers, Hardware
+=item * 46   Biotechnology and Pharmaceutical
 
-=item * 6   Computers, Software
+=item * 3979 Building and Grounds Maintenance
 
-=item * 544 Construction, Mining and Trades
+=item * 8125 Business Opportunity/Investment Required 
 
-=item * 546 Consulting Services
+=item * 8126 Career Fairs 
 
-=item * 545 Customer Service and Call Center
+=item * 9005 Computer Services 
 
-=item * 3   Education, Training, and Library
+=item * 543  Computers, Hardware
 
-=item * 547 Employment Placement Agencies
+=item * 6    Computers, Software
 
-=item * 4   Engineering
+=item * 544  Construction, Mining and Trades
 
-=item * 548 Finance/Economics
+=item * 546  Consulting Services
 
-=item * 549 Financial Services
+=item * 5622 Consumer Products 
 
-=item * 550 Government and Policy
+=item * 545  Customer Service and Call Center
 
-=item * 551 Healthcare, Other
+=item * 3    Education, Training, and Library
 
-=item * 9   Healthcare, Practitioner and Technician
+=item * 7305 Electronics 
 
-=item * 552 Hospitality/Tourism
+=item * 547  Employment Placement Agencies
 
-=item * 5   Human Resources
+=item * 5624 Energy/Utilities 
 
-=item * 660 Information Technology
+=item * 4    Engineering
 
-=item * 553 Installation, Maintenance, and Repair
+=item * 9002 Environmental Services 
 
-=item * 45  Insurance
+=item * 3561 Executive Management 
 
-=item * 554 Internet/E-Commerce
+=item * 548  Finance/Economics
 
-=item * 555 Law Enforcement, and Security
+=item * 549  Financial Services
 
-=item * 7   Legal
+=item * 550  Government and Policy
 
-=item * 47  Manufacturing and Production
+=item * 7306 Healthcare - Business Office & Finance 
 
-=item * 556 Military
+=item * 2947 Healthcare - CNAs/Aides/MAs/Home Health 
 
-=item * 11  Other
+=item * 3972 Healthcare - Laboratory/Pathology Services 
 
-=item * 557 Personal Care and Service
+=item * 2963 Healthcare - LPNs & LVNs 
 
-=item * 558 Real Estate
+=item * 2990 Healthcare - Medical & Dental Practitioners 
 
-=item * 13  Restaurant and Food Service
+=item * 3007 Healthcare - Medical Records, Health IT & Informatics 
 
-=item * 44  Retail/Wholesale
+=item * 9014 Healthcare - Optical 
 
-=item * 10  Sales
+=item * 551  Healthcare, Other
 
-=item * 559 Science
+=item * 3973 Healthcare - Pharmacy 
 
-=item * 560 Sports and Recreation
+=item * 3974 Healthcare - Radiology/Imaging 
 
-=item * 561 Telecommunications
+=item * 3975 Healthcare - RNs & Nurse Management 
 
-=item * 562 Transportation and Warehousing
+=item * 3976 Healthcare - Social Services/Mental Health 
 
-=item 
+=item * 3977 Healthcare - Support Services 
+
+=item * 3978 Healthcare - Therapy/Rehab Services 
+
+=item * 552  Hospitality/Tourism
+
+=item * 5    Human Resources/Recruiting
+
+=item * 660  Information Technology
+
+=item * 553  Installation, Maintenance, and Repair
+
+=item * 45   Insurance
+
+=item * 554  Internet/E-Commerce
+
+=item * 555  Law Enforcement, and Security
+
+=item * 7    Legal
+
+=item * 47   Manufacturing and Production
+
+=item * 556  Military
+
+=item * 542  Nonprofit 
+
+=item * 9010 Operations Management 
+
+=item * 11   Other
+
+=item * 557  Personal Care and Service
+
+=item * 9007 Product Management 
+
+=item * 9008 Project/Program Management 
+
+=item * 5623 Publishing/Printing 
+
+=item * 7307 Purchasing 
+
+=item * 558  Real Estate
+
+=item * 13   Restaurant and Food Service
+
+=item * 44   Retail/Wholesale
+
+=item * 10   Sales
+
+=item * 9009 Sales - Account Management 
+
+=item * 9011 Sales - Telemarketing 
+
+=item * 5957 Sales - Work at Home/Commission Only 
+
+=item * 559  Science
+
+=item * 560  Sports and Recreation/Fitness
+
+=item * 5625 Supply Chain/Logistics 
+
+=item * 561  Telecommunications
+
+=item * 9013 Textiles 
+
+=item * 562  Transportation and Warehousing
+
+=item * 9003 Veterinary Services 
+
+=item * 9006 Waste Management Services 
 
 =back
 
@@ -179,13 +246,15 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 #####################################################################
 
+package WWW::Search::Monster;
+
 require Exporter;
 require WWW::SearchResult;
 require HTML::TokeParser;
 @EXPORT = qw();
 @EXPORT_OK = qw();
 @ISA = qw(WWW::Search Exporter);
-$VERSION = '1.02';
+$VERSION = do { my @r = (q$Revision: 2.2 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 use Carp ();
 use WWW::Search(generic_option);
@@ -235,10 +304,10 @@ sub native_retrieve_some
   my ($self) = @_;
   my $debug = $self->{'_debug'};
   print STDERR " *   Monster::native_retrieve_some()\n" if($debug);
-  
+
   # fast exit if already done
   return 0 if (!defined($self->{_next_url}));
-  
+
   # get some
   print STDERR " *   sending request (",$self->{_next_url},")\n" if($debug);
   my($response) = $self->http_request('GET', $self->{_next_url});
@@ -247,9 +316,7 @@ sub native_retrieve_some
       print STDERR $response->error_as_HTML;
       return 0;
   };
-  
   print STDERR " *   got response\n" if($debug);
-
 
   if($response->content =~ m/No jobs matched the query/) {
       print STDERR "No jobs matched the query\n";
@@ -264,56 +331,43 @@ sub native_retrieve_some
   $content =~ s/  / /ig;
   $content =~ m/Jobs (\d+) to (\d+) of (\d+)/;
   my $nrows = $2 - $1 + 1;
-  if($content =~ m/Next page &gt;&gt;/) {
-      my $options;
-      my $nexturl;
-      PROCESS_FORM: while(1) {
-	  $tag = $p->get_tag("form");
-	  $nexturl = $self->{'search_base_url'} . '/'. 
-	      $tag->[1]{'action'} . '?';
-	  while(1) {
-	      $token = $p->get_token();
-	      my $type = $token->[0];
-	      $tag = $token->[1];
-	      next PROCESS_FORM if($type eq 'E' && $tag eq 'form');
-	      next if($tag ne 'input');
-	      my $value = $token->[2]{'value'};
-	      last PROCESS_FORM if ($value =~ m/Next page \>\>/);
-	      next PROCESS_FORM if ($value =~ m/\<\< Previous page/);
-	      my $name = $token->[2]{'name'};
-	      my $escaped = WWW::Search::escape_query($value);
-	      $nexturl .= "$name=$escaped" . '&' ;
-	  }
-      }
-      print STDERR "Next url is $nexturl\n" if($debug);
-      $self->{'_next_url'} = $nexturl;
-  } else {
-      print STDERR "No next button\n" if($debug);
-  } 
+  $self->approximate_hit_count($3);
+
+  # Determine _next_url
+  my ($nexturl) =
+    ($content =~ /<a[^>]*href="([^"]*)[^>]*>Next page &gt;&gt;</ );
+  $self->{'_next_url'} = $self->{search_base_url} . $nexturl;
 
   my($hits_found) = 0;
   my($hit) = ();
 
   $p = new HTML::TokeParser(\$content);
-  while(1) {
-      $tag = $p->get_tag("td");
+
+  #skim the content until we reach the header row of the main table
+  while($p->get_tag("td"))
+  {
       my $data = $p->get_trimmed_text("/td");
       last if($data eq 'Location' ||
 	      $data eq 'Company' ||
-	      $data eq 'Modified');
+	      $data eq 'Modified');   # 'Modified' is not used anymore (Jan06)
   }
+
   for(my $i = 0; $i< $nrows; $i++) {
-      $tag = $p->get_tag("tr");
+      $tag = $p->get_tag("tr");    #Jump to beginning of next row
+
       $tag = $p->get_tag("td");
-      $tag = $p->get_tag("td"); # fix skew problem WR
       my $date = $p->get_trimmed_text("/td");
-      $tag = $p->get_tag("td");
-      my $location = $p->get_trimmed_text("/td");
+
       $tag = $p->get_tag("a");
       my $url = $self->{'search_base_url'} . $tag->[1]{href};
       my $title = $p->get_trimmed_text("/a");
+
       $tag = $p->get_tag("td");
       my $company = $p->get_trimmed_text("/td");
+
+      $tag = $p->get_tag("a");
+      my $location = $p->get_trimmed_text("/a");
+
       $hit = new WWW::SearchResult;
       $hit->url($url);
       $hit->company($company);
@@ -328,3 +382,6 @@ sub native_retrieve_some
 } # native_retrieve_some
 
 1;
+
+__END__
+
