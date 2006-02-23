@@ -11,4 +11,4 @@ no_index:
 requires:
   WWW::Search: 0
   perl: 5.004
-version: 2.021
+version: 2.022

@@ -1,6 +1,7 @@
 # -*- perl -*-
 
 use strict;
+use ExtUtils::testlib;
 use Test;
 use WWW::Search;
 
