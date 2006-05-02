@@ -1,7 +1,7 @@
 abstract: Query job-related web search engines
-author: Martin Thurn <mthurn@cpan.org>
+author: 'Martin Thurn <mthurn@cpan.org>'
 distribution_type: module
-generated_by: Module::Install version 0.52
+generated_by: Module::Install version 0.61
 license: perl
 name: WWW-Search-Jobs
 no_index:
@@ -11,4 +11,4 @@ no_index:
 requires:
   WWW::Search: 0
   perl: 5.004
-version: 2.022
+version: 2.023

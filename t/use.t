@@ -1,4 +1,5 @@
-# -*- perl -*-
+
+# $Id: use.t,v 1.3 2006/03/30 12:51:53 Daddy Exp $
 
 use strict;
 use ExtUtils::testlib;
@@ -11,7 +12,8 @@ open MAN, "<MANIFEST" or die " --- can not open MANIFEST for read: $!";
 $/ = "\n";
 my @as = <MAN>;
 close MAN or warn " --- can not close MANIFEST after read: $!";
-chomp @as;
+# This is an OS-independent chomp:
+map { tr/\r\n//d } @as;
 local $" = ',';
 # print STDERR " + read from MANIFEST (@as)\n";
 @as = grep {/lib/} @as;
