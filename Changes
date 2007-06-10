@@ -1,5 +1,7 @@
 2007-06-09    <Daddy@C-3PO>
 
+	* module AltaVista::Careers deleted (already exists in WWW-Search-AltaVista distro)
+
 	* add pod test
 
 	* use strict in all modules
