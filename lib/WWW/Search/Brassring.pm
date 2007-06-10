@@ -10,6 +10,8 @@
 
 package WWW::Search::Brassring;
 
+use strict;
+
 =head1 NAME
 
 WWW::Search::Brassring - class for searching http://www.Brassring.com/jobsearch
@@ -40,9 +42,9 @@ F<http://www.brassring.com/jobsearch>.
 By default, returned WWW::SearchResult objects contain only url, title
 and description which is a mixture of location and skills wanted.
 
-=head1 OPTIONS 
+=head1 OPTIONS
 
-=head2 Job Query
+=over
 
 =item Query on Keywords, Title or Company
 
@@ -51,35 +53,19 @@ and description which is a mixture of location and skills wanted.
 The following search options can be activated by sending
 a hash as the second argument to native_query().
 
-=head2 Query options
-
-=over 2
-
 =item Restrict search by country
 
 {'ctry' => 'United States'}
 
 =item Sort jobs found
 
-Sort by relevance {'like' => 'likep'}
+Sort by relevance: {'like' => 'likep'}
 
-Sort by posting date {'like' =>  'like'}
-
-=back
-
-=over 2
+Sort by posting date: {'like' =>  'like'}
 
 =item Restrict jobs found by state (US)
 
 {'st' => $st} - Only jobs in st $st.
-
-=back
-
-=over 2
-
-=item Debug print statements
-
-{'search_debug' => -1}
 
 =back
 
@@ -97,16 +83,13 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
 
-require Exporter;
-require WWW::SearchResult;
-require HTML::TokeParser;
-@EXPORT = qw();
-@EXPORT_OK = qw();
-@ISA = qw(WWW::Search Exporter);
-$VERSION = '1.00';
-
 use Carp ();
-use WWW::Search(generic_option);
+use HTML::TokeParser;
+use base 'WWW::Search';
+use WWW::SearchResult;
+
+our
+$VERSION = do{ my @r = (q$Revision: 1.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
 
 sub native_setup_search
   {
@@ -183,7 +166,7 @@ sub native_retrieve_some
 	 # no jobs
 	 m/There.+are.+0 jobs/s) {
 	  print STDERR "0 jobs found\n"; 
-	  $self->{'_next_url'} = $undef;
+	  $self->{'_next_url'} = undef;
 	  return 0;
       }
   }
@@ -191,23 +174,6 @@ sub native_retrieve_some
   print STDERR " *   sending request (",$self->{_next_url},")\n" 
       if($debug);
 
-  if($response->content() =~ m/Show next/) {
-      while(1) {
-	  my $linktitle = $p->get_trimmed_text("/a");
-	  if($linktitle =~ m/Show next/) {
-	      $self->{'_next_url'} = $url;
-	      print STDERR "Next url is $url\n" if($debug);
-	      last;
-	  }
-	  $tag = $p->get_tag("a");
-	  $url = $tag->[1]{href};
-      }
-  } else {
-      print STDERR "**************** No next link \n" if($debug);
-      $self->{_next_url} = undef;
-  }
-
-  
   my $p = new HTML::TokeParser(\$response->content());
   while(1) {
       $tag = $p->get_tag("a");
@@ -252,8 +218,25 @@ sub native_retrieve_some
       last unless($url =~ m/JobId/);
   }
 
+  if($response->content() =~ m/Show next/) {
+      while(1) {
+	  my $linktitle = $p->get_trimmed_text("/a");
+	  if($linktitle =~ m/Show next/) {
+	      $self->{'_next_url'} = $url;
+	      print STDERR "Next url is $url\n" if($debug);
+	      last;
+	  }
+	  $tag = $p->get_tag("a");
+	  $url = $tag->[1]{href};
+      }
+  } else {
+      print STDERR "**************** No next link \n" if($debug);
+      $self->{_next_url} = undef;
+  }
+
   return $hits_found;
 } # native_retrieve_some
 
-
 1;
+
+__END__

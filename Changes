@@ -1,3 +1,9 @@
+2007-06-09    <Daddy@C-3PO>
+
+	* add pod test
+
+	* use strict in all modules
+
 2006-05-02    <Daddy@C-3PO>
 
 	* Dice.pm: module resurrected by Brian Sammon

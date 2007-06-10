@@ -1,9 +1,9 @@
 
-# $Id: use.t,v 1.3 2006/03/30 12:51:53 Daddy Exp $
+# $Id: use.t,v 1.4 2007/06/10 00:51:44 Daddy Exp $
 
 use strict;
 use ExtUtils::testlib;
-use Test;
+use Test::More;
 use WWW::Search;
 
 use vars qw( @as );
@@ -28,9 +28,9 @@ foreach my $sEngine (@as)
   $sEngine =~ s!\.pm!!;
   $sEngine =~ s!lib/WWW/Search/!!;
   $sEngine =~ s!/!::!g;
-  # print STDERR "($sEngine)...\n";
-  eval { $o = new WWW::Search($sEngine) };
-  ok(ref($o));
+  # diag "($sEngine)...";
+  $o = new WWW::Search($sEngine);
+  isa_ok($o, qq"WWW::Search::$sEngine");
   } # foreach
 
 exit 0;

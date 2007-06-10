@@ -50,24 +50,17 @@ a hash as the second argument to native_query().
 
 =over 2
 
+=item Restrict by Location
 
-=head2 Restrict by Location
+use {'lid' => $location_id}
 
-No restriction by default.
+Only jobs in $location_id.
+To find out what $location_id you need, please look
+at the source of F<http://jobsearch.monster.com>.
+Note that $location_id does B<not> mean the area telephone code.
+The default is no location restriction.
 
-=back
-
-=over 2
-
-=item   {'lid' => $location_id}
-
-Only jobs in $location_id. To find out what $location_id you need please look
-at the source of F<http://jobsearch.monster.com>. Note that $location_id does
-B<not> mean the area telephone code.
-
-=back
-
-=head2 Restrict by Job Category
+=item Restrict by Job Category
 
 Use {'fn' => $cat_id}  to select one or more job categories you want.
 For multiple selection use a '+' sign, e.g. {'fn' => '1+2'}.
@@ -231,6 +224,8 @@ Possible categories are:
 
 =back
 
+=back
+
 =head1 AUTHOR
 
 C<WWW::Search::Monster> is written and maintained by Alexander Tkatchev
@@ -248,16 +243,16 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 package WWW::Search::Monster;
 
-require Exporter;
-require WWW::SearchResult;
-require HTML::TokeParser;
-@EXPORT = qw();
-@EXPORT_OK = qw();
-@ISA = qw(WWW::Search Exporter);
-$VERSION = do { my @r = (q$Revision: 2.2 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
+use strict;
 
 use Carp ();
-use WWW::Search(generic_option);
+require HTML::TokeParser;
+use WWW::Search qw(generic_option);
+use base 'WWW::Search';
+require WWW::SearchResult;
+
+our
+$VERSION = do { my @r = (q$Revision: 2.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 sub native_setup_search
   {
@@ -291,7 +286,7 @@ sub native_setup_search
     $options_ref->{$_} =~ s/\+/\,/g if($_ eq 'st');
     $options_ref->{$_} =~ s/\+/\&$_=/g unless($_ eq 'q');
     $options .= $_ . '=' . $options_ref->{$_} . '&';
-    }
+    } # foreach
   # Finally figure out the url.
   $self->{_next_url} = $self->{_options}{'search_url'} .'?'. $options;;
   $self->{_debug} = $options_ref->{'search_debug'};

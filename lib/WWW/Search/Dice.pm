@@ -9,6 +9,8 @@
 
 package WWW::Search::Dice;
 
+use strict;
+
 =head1 NAME
 
 WWW::Search::Dice - class for searching Dice
@@ -181,18 +183,15 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
 
-require Exporter;
-require WWW::SearchResult;
-require HTML::TokeParser;
-use HTTP::Request::Common;
-@EXPORT = qw();
-@EXPORT_OK = qw();
-@ISA = qw(WWW::Search Exporter);
-$VERSION = '2.02';
-use strict;
-
 use Carp ();
+use HTML::TokeParser;
+use HTTP::Request::Common;
+use WWW::SearchResult;
 use WWW::Search('generic_option');
+use base 'WWW::Search';
+
+our
+$VERSION = do{ my @r = (q$Revision: 2.731 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
 
 sub native_setup_search
 {

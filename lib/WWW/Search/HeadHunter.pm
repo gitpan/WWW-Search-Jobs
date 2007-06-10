@@ -9,6 +9,8 @@
 
 package WWW::Search::HeadHunter;
 
+use strict;
+
 =head1 NAME
 
 WWW::Search::HeadHunter - class for searching HeadHunter
@@ -389,16 +391,14 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
 
-require Exporter;
-require WWW::SearchResult;
-require HTML::TokeParser;
-@EXPORT = qw();
-@EXPORT_OK = qw();
-@ISA = qw(WWW::Search Exporter);
-$VERSION = '1.01';
-
 use Carp ();
-use WWW::Search(generic_option);
+use HTML::TokeParser;
+use WWW::Search qw(generic_option);
+use base 'WWW::Search';
+use WWW::SearchResult;
+
+our
+$VERSION = do{ my @r = (q$Revision: 1.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
 
 sub native_setup_search
   {

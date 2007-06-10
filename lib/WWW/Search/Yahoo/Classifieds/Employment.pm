@@ -9,6 +9,8 @@
 
 package WWW::Search::Yahoo::Classifieds::Employment;
 
+use strict;
+
 =head1 NAME
 
 WWW::Search::Yahoo::Classifieds::Employment - class for searching
@@ -458,16 +460,14 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 #####################################################################
 
-require Exporter;
-require WWW::SearchResult;
-require HTML::TokeParser;
-@EXPORT = qw();
-@EXPORT_OK = qw();
-@ISA = qw(WWW::Search Exporter);
-$VERSION = '1.02';
-
 use Carp ();
-use WWW::Search(generic_option);
+require HTML::TokeParser;
+use WWW::Search qw(generic_option);
+use base 'WWW::Search';
+require WWW::SearchResult;
+
+our
+$VERSION = do { my @r = (q$Revision: 1.2 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 sub native_setup_search
   {
