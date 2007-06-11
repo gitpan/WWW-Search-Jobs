@@ -246,13 +246,13 @@ package WWW::Search::Monster;
 use strict;
 
 use Carp ();
-require HTML::TokeParser;
+use HTML::TokeParser;
 use WWW::Search qw(generic_option);
 use base 'WWW::Search';
-require WWW::SearchResult;
+use WWW::SearchResult;
 
 our
-$VERSION = do { my @r = (q$Revision: 2.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 2.4 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 sub native_setup_search
   {

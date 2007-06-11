@@ -10,7 +10,6 @@ inc/Module/Install/WriteAll.pm
 lib/WWW/Search/AOL/Classifieds/Employment.pm
 lib/WWW/Search/Brassring.pm
 lib/WWW/Search/Dice.pm
-lib/WWW/Search/Headhunter.pm
 lib/WWW/Search/Monster.pm
 lib/WWW/Search/Yahoo/Classifieds/Employment.pm
 Makefile.PL
