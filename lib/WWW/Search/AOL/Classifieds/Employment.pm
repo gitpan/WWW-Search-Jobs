@@ -171,6 +171,7 @@ MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 package WWW::Search::AOL::Classifieds::Employment;
 
 use strict;
+use warnings;
 
 use Carp ();
 require HTML::TokeParser;
@@ -179,7 +180,7 @@ use base 'WWW::Search';
 require WWW::SearchResult;
 
 our
-$VERSION = do { my @r = (q$Revision: 1.2 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 sub native_setup_search
   {

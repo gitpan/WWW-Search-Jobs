@@ -11,6 +11,7 @@
 package WWW::Search::Brassring;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -89,7 +90,7 @@ use base 'WWW::Search';
 use WWW::SearchResult;
 
 our
-$VERSION = do{ my @r = (q$Revision: 1.3 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
+$VERSION = do{ my @r = (q$Revision: 1.4 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
 
 sub native_setup_search
   {

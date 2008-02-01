@@ -10,6 +10,7 @@
 package WWW::Search::Dice;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -191,7 +192,7 @@ use WWW::Search('generic_option');
 use base 'WWW::Search';
 
 our
-$VERSION = do{ my @r = (q$Revision: 2.731 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
+$VERSION = do{ my @r = (q$Revision: 2.732 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r};
 
 sub native_setup_search
 {

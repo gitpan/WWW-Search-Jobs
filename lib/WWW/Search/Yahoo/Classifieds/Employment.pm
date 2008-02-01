@@ -10,6 +10,7 @@
 package WWW::Search::Yahoo::Classifieds::Employment;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -467,7 +468,7 @@ use base 'WWW::Search';
 require WWW::SearchResult;
 
 our
-$VERSION = do { my @r = (q$Revision: 1.111 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
+$VERSION = do { my @r = (q$Revision: 1.112 $ =~ /\d+/g); sprintf "%d."."%03d" x $#r, @r };
 
 sub native_setup_search
   {
