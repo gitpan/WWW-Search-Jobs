@@ -1,9 +1,9 @@
 
-# $Id: Makefile.PL,v 2.10 2008/02/01 02:53:56 Daddy Exp $
+# $Id: Makefile.PL,v 2.11 2008/12/14 21:41:50 Martin Exp $
 
 use inc::Module::Install;
 name('WWW-Search-Jobs');
-version(2.027);
+version(2.028);
 author('Martin Thurn <mthurn@cpan.org>');
 abstract('Query job-related web search engines');
 license('perl');
